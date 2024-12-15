@@ -5,7 +5,6 @@ terraform {
       version = "~> 3.79"
     }
   }
-
 }     
 
 provider "azurerm" {
