@@ -27,6 +27,7 @@ resource "azurerm_virtual_machine" "main" {
     storage_os_disk {
         name            = azurerm_managed_disk.os_disk.name
         managed_disk_id = azurerm_managed_disk.os_disk.id
+        create_option   = "Attach" 
     }
 
 
