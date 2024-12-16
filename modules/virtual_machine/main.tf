@@ -18,8 +18,7 @@ resource "azurerm_virtual_machine" "main" {
     vm_size               = var.vm_size
 
     storage_os_disk {
-        name              = azurerm_managed_disk.os_disk.name
-        managed_disk_id   = azurerm_managed_disk.os_disk.id
+        name              = "${var.vm_name}_os_disk
         create_option     = "FromImage"
         caching           = "ReadWrite"
         managed_disk_type = "Standard_LRS"
