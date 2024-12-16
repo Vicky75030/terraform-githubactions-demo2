@@ -18,9 +18,9 @@ resource "azurerm_virtual_machine" "main" {
     vm_size               = var.vm_size
 
     storage_os_disk {
-        name              = "${var.vm_name}_os_disk
-        create_option     = "FromImage"
+        name              = "${var.vm_name}_os_disk"
         caching           = "ReadWrite"
+        create_option     = "FromImage"
         managed_disk_type = "Standard_LRS"
     }
 
@@ -40,10 +40,5 @@ resource "azurerm_virtual_machine" "main" {
     os_profile_linux_config {
         disable_password_authentication = false
     }
-
-    depends_on = [
-        azurerm_managed_disk.os_disk
-    ]
+    depends_on= [ azurerm_virtual_machine]
 }
-
-
