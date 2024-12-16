@@ -10,13 +10,6 @@ resource "azurerm_network_interface" "main" {
     }
 }
 
-resource "azurerm_managed_disk" "os_disk" {
-    name                 = "${var.vm_name}_os_disk"
-    location             = var.location
-    resource_group_name  = var.resource_group_name
-    storage_account_type = "Standard_LRS"
-    create_option        = "FromImage"
-}
 resource "azurerm_virtual_machine" "main" {
     name                  = var.vm_name
     location              = var.location
@@ -25,11 +18,12 @@ resource "azurerm_virtual_machine" "main" {
     vm_size               = var.vm_size
 
     storage_os_disk {
-        name            = azurerm_managed_disk.os_disk.name
-        managed_disk_id = azurerm_managed_disk.os_disk.id
-        create_option   = "Attach" 
+        name              = azurerm_managed_disk.os_disk.name
+        managed_disk_id   = azurerm_managed_disk.os_disk.id
+        create_option     = "FromImage"
+        caching           = "ReadWrite"
+        managed_disk_type = "Standard_LRS"
     }
-
 
     storage_image_reference {
         publisher = "Canonical"
@@ -47,4 +41,10 @@ resource "azurerm_virtual_machine" "main" {
     os_profile_linux_config {
         disable_password_authentication = false
     }
+
+    depends_on = [
+        azurerm_managed_disk.os_disk
+    ]
+}
+
 }
