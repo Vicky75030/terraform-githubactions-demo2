@@ -24,6 +24,12 @@ resource "azurerm_virtual_machine" "main" {
     network_interface_ids = [azurerm_network_interface.main.id]
     vm_size               = var.vm_size
 
+    storage_os_disk {
+        name            = azurerm_managed_disk.os_disk.name
+        managed_disk_id = azurerm_managed_disk.os_disk.id
+    }
+
+
     storage_image_reference {
         publisher = "Canonical"
         offer     = "UbuntuServer"
