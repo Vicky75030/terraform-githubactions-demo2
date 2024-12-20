@@ -1,0 +1,5 @@
+organization = "Vivekyadav-tf"
+workspaces  {
+    name= "dev-azure-testing"
+}
+ 
