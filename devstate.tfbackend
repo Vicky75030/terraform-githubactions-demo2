@@ -1,5 +1,5 @@
 organization = "Vivekyadav-tf"
 workspaces  {
-    name= "dev-azure-testing"
+    name= "dev-tf-self"
 }
  
