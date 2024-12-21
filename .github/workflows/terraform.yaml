@@ -13,7 +13,7 @@ on:
 jobs:
   terraform:
     name: Terraform Workflow
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment: ${{ github.event.inputs.environment }}
     env:
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -46,7 +46,7 @@ jobs:
         
   approval:
     needs: terraform 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment:
       name: approval
     steps:
@@ -55,7 +55,7 @@ jobs:
         continue-on-error: true 
         
   terraform-apply:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: approval
     environment: ${{ github.event.inputs.environment }}
     env:
