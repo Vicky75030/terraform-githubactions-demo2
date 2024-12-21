@@ -33,11 +33,7 @@ jobs:
         run: terraform init -backend-config=${{ github.event.inputs.environment }}state.tfbackend -backend-config="token=${{ secrets.TFC_TOKEN }}"
 
 
-      - name: Terraform Format
-        run: terraform fmt -write=true
-
-      - name: Terraform Plan Destroy
-        run: terraform plan -destroy -var-file=${{ github.event.inputs.environment }}-terraform.tfvars
+      
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve -var-file=${{ github.event.inputs.environment }}-terraform.tfvars
